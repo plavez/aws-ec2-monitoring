@@ -1,7 +1,11 @@
-output "s3_bucket_name" {
-  value = aws_s3_bucket.test_bucket.bucket
+output "bucket" {
+  value = aws_s3_bucket.demo.bucket
 }
 
-output "ec2_instance_id" {
-  value = aws_instance.demo_instance.id
+output "instance_id" {
+  value = aws_instance.demo.id
+}
+
+output "instance_name" {
+  value = aws_instance.demo.tags["Name"]
 }

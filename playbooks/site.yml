@@ -1,0 +1,7 @@
+---
+- hosts: local_ec2
+  become: true
+  roles:
+    - docker_install
+
+...

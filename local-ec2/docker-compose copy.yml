@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  local-ec2:
+    image: ubuntu:22.04
+    container_name: local-ec2
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "2222:22"
+    labels:
+      aws.instance_id: "${INSTANCE_ID}"
+    volumes:
+      - ./data:/data
+      - ~/.ssh/id_rsa_local.pub:/seed/authorized_keys:ro
+      - ./scripts/startup.sh:/usr/local/bin/startup.sh:ro
+
+    entrypoint: /usr/local/bin/startup.sh
+

@@ -1,0 +1,19 @@
+
+
+services:
+  local-ec2:
+    build:
+      context: .
+      dockerfile: /home/ubuntu/aws-ec2-monitoring/Dockerfile
+    container_name: local-ec2
+    privileged: true     # <<< ОБЯЗАТЕЛЬНО для systemd
+    tty: true
+    ports:
+      - "2222:22"
+    volumes:
+      - ./data:/data
+      - ~/.ssh/id_rsa_local.pub:/seed/authorized_keys:ro
+      - ./scripts/startup.sh:/usr/local/bin/startup.sh:ro
+    environment:
+      - container=docker
+    command: /sbin/init
